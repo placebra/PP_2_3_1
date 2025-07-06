@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Список сотрудников</title>
+    <style>
+        body {
+            background: #f9f9f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        h2 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        a.add-user-button {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            padding: 10px 25px;
+            background: #1976d2;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgb(25 118 210 / 0.4);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        a.add-user-button:hover,
+        a.add-user-button:focus {
+            background: #1565c0;
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        table {
+            border-collapse: separate;
+            border-spacing: 0 12px;
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        thead tr {
+            background: #1976d2;
+            color: white;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+            user-select: none;
+        }
+
+        th, td {
+            padding: 12px 20px;
+        }
+
+        tbody tr {
+            background: #fff;
+            transition: background-color 0.25s ease;
+            cursor: default;
+        }
+        tbody tr:hover {
+            background: #e8f0fe;
+        }
+
+        /* Кнопка обновления */
+        a.update-link {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #4caf50;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 6px;
+            box-shadow: 0 3px 8px rgb(76 175 80 / 0.5);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        a.update-link:hover,
+        a.update-link:focus {
+            background: #3a9a35;
+            transform: scale(1.05);
+            outline: none;
+        }
+
+        /* Кнопка удаления (форма) */
+        form {
+            margin: 0;
+        }
+        input[type="submit"] {
+            cursor: pointer;
+            padding: 6px 14px;
+            background: #e53935;
+            border: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 6px;
+            box-shadow: 0 3px 8px rgb(229 57 53 / 0.5);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        input[type="submit"]:hover,
+        input[type="submit"]:focus {
+            background: #b92b23;
+            transform: scale(1.05);
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Список пользователей:</h2>
+<a href="/user-table/add" class="add-user-button">Добавить пользователя</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Отдел</th>
+        <th>Зарплата</th>
+        <th>Обновить</th>
+        <th>Удалить</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td><p th:text="${user.id}"></p></td>
+        <td><p th:text="${user.name}"></p></td>
+        <td><p th:text="${user.department}"></p></td>
+        <td><p th:text="${user.salary}"></p></td>
+        <td>
+            <a th:href="@{/user-table/edit(id=${user.id})}" class="update-link">Обновить</a>
+        </td>
+        <td>
+            <form method="post" action="/user-table/remove">
+                <input type="hidden" name="id" th:value="${user.id}">
+                <input type="submit" value="Удалить">
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
