@@ -8,12 +8,6 @@
   <name>PP_2_3_1 Maven Webapp</name>
   <url>http://maven.apache.org</url>
 
-  <properties>
-      <spring.version></spring.version>
-
-
-  </properties>
-
   <dependencies>
 
     <!-- Java Servlet Api -->

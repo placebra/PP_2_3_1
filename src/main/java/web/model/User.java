@@ -6,14 +6,6 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 
-    public User() {}
-
-    public User(String name, String department, double salary) {
-        this.name = name;
-        this.department = department;
-        this.salary = salary;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -26,6 +18,14 @@ public class User {
 
     @Column(name = "salary")
     private double salary;
+
+    public User() {}
+
+    public User(String name, String department, double salary) {
+        this.name = name;
+        this.department = department;
+        this.salary = salary;
+    }
 
     public int getId() {
         return id;
