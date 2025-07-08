@@ -47,7 +47,7 @@ public class DataBaseConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(getDataSource());
-        em.setPackagesToScan("web.model"); // где лежат твои @Entity
+        em.setPackagesToScan("web.model"); // где лежат @Entity
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -55,7 +55,7 @@ public class DataBaseConfig {
         Properties props = new Properties();
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-        props.put("hibernate.dialect", env.getProperty("hibernate.dialect")); // Не забудь указать в .properties
+        props.put("hibernate.dialect", env.getProperty("hibernate.dialect")); // Все 3 в .properties
 
         em.setJpaProperties(props);
 
